@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import PokemonPicture from '@/modules/pokemon/components/PokemonPicture.vue';
 import PokemonOptions from '@/modules/pokemon/components/PokemonOptions.vue';
+import { usePokemonGame } from '@/modules/pokemon/composables/usePokemonGame.ts';
+
+const { gameStatus, isLoading, pokemonOptions } = usePokemonGame();
+
+
 </script>
 
 <template>
-  <section v-if="false" class="flex flex-col items-center justify-center text-gray-200 w-screen h-screen">
+  <section v-if="isLoading" class="flex flex-col items-center justify-center text-gray-200 w-screen h-screen">
     <h1 class="text-3xl">Espere por favor</h1>
     <h3 class="animate-pulse">Cargando pokemons</h3>
   </section>
