@@ -1,10 +1,31 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from 'vue';
+
+interface Props {
+  pokemonId: number;
+  showPokemon?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  showPokemon: false,
+});
+
+const pokemonPicture = computed(
+  () => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${props.pokemonId}.svg`);
+</script>
 
 <template>
   <section>
     <img
-      class="brightness-0"
-      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/132.svg"
+      v-if="!showPokemon"
+      class="brightness-0 h-[200px]"
+      :src="pokemonPicture"
+      alt="Pokemon Picture"
+    />
+    <img
+      v-else
+      class="h-[200px] fade-in delay-300"
+      :src="pokemonPicture"
       alt="Pokemon Picture"
     />
   </section>
