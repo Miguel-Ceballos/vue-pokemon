@@ -4,11 +4,15 @@ import PokemonOptions from '@/modules/pokemon/components/PokemonOptions.vue';
 import { usePokemonGame } from '@/modules/pokemon/composables/usePokemonGame.ts';
 import { GameStatus } from '@/modules/pokemon/interfaces';
 
-const { gameStatus, isLoading, pokemonOptions: options, randomPokemon } = usePokemonGame();
+const {
+  gameStatus,
+  isLoading,
+  clickCount,
+  pokemonOptions: options,
+  randomPokemon,
+  checkAnswer,
+} = usePokemonGame();
 
-const onSelectedOption = (value: number) => {
-  console.log(value);
-};
 </script>
 
 <template>
@@ -25,7 +29,7 @@ const onSelectedOption = (value: number) => {
     class="flex flex-col items-center justify-center text-gray-200 w-screen h-screen gap-8"
   >
     <h1 class="text-3xl">¿Quién es este Pokémon?</h1>
-    <h3 class="text-xl capitalize">{{gameStatus}}</h3>
+    <h3 class="text-xl capitalize">{{ gameStatus }}</h3>
 
     <!-- Pokemon Picture -->
     <PokemonPicture
@@ -34,7 +38,12 @@ const onSelectedOption = (value: number) => {
     />
 
     <!-- Pokemon Options -->
-    <PokemonOptions :options="options" @selected-option="onSelectedOption" />
+    <PokemonOptions
+      :options="options"
+      @selected-option="checkAnswer"
+      :block-selection="gameStatus !== GameStatus.Playing"
+      :pokemon-id="randomPokemon.id"
+    />
   </section>
 </template>
 
