@@ -1,13 +1,27 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { Pokemon } from '@/modules/pokemon/interfaces';
+
+interface Props {
+  options: Pokemon[];
+}
+
+defineProps<Props>();
+
+defineEmits<{
+  selectedOption: [id: number];
+}>();
+</script>
 
 <template>
-  <section>
-    <ul class="flex flex-col gap-2">
-      <li class="px-2 py-1 bg-gray-700 rounded-md w-40 text-center hover:cursor-pointer hover:bg-gray-600">Option 1</li>
-      <li class="px-2 py-1 bg-gray-700 rounded-md w-40 text-center hover:cursor-pointer hover:bg-gray-600">Option 2</li>
-      <li class="px-2 py-1 bg-gray-700 rounded-md w-40 text-center hover:cursor-pointer hover:bg-gray-600">Option 3</li>
-      <li class="px-2 py-1 bg-gray-700 rounded-md w-40 text-center hover:cursor-pointer hover:bg-gray-600">Option 4</li>
-    </ul>
+  <section class="mt-5 flex flex-col gap-2">
+    <button
+      v-for="{ name, id } in options"
+      @click="$emit('selectedOption', id)"
+      :key="id"
+      class="p-2 bg-white rounded-md hover:active:bg-primary-100:5 text-gray-700 hover:cursor-pointer hover:bg-gray-100 capitalize"
+    >
+      {{ name }}
+    </button>
   </section>
 </template>
 
