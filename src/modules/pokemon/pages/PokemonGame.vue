@@ -11,8 +11,8 @@ const {
   pokemonOptions: options,
   randomPokemon,
   checkAnswer,
+  getNextRound,
 } = usePokemonGame();
-
 </script>
 
 <template>
@@ -30,6 +30,10 @@ const {
   >
     <h1 class="text-3xl">¿Quién es este Pokémon?</h1>
     <h3 class="text-xl capitalize">{{ gameStatus }}</h3>
+
+    <button v-if="gameStatus !== GameStatus.Playing" class="bg-purple-500 text-white p-2 rounded-lg" @click="getNextRound(4)">
+      ¿Jugar de nuevo?
+    </button>
 
     <!-- Pokemon Picture -->
     <PokemonPicture

@@ -52,6 +52,10 @@ export const usePokemonGame = () => {
     gameStatus.value = GameStatus.Lost;
   };
 
+  const getNextRound = (quantity: number) => {
+    getNextOptions(quantity);
+  };
+
   onMounted(async () => {
     pokemons.value = await getPokemons();
     getNextOptions();
@@ -66,5 +70,6 @@ export const usePokemonGame = () => {
     // Methods
     getNextOptions,
     checkAnswer,
+    getNextRound,
   };
 };
